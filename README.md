@@ -37,13 +37,19 @@ avito-search-relevance/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
-├── data/                       # датасет и тестовые данные (не включены в git, см. .gitignore)
+├── data/                       # датасет (скачивается с Kaggle, см. инструкцию ниже)
+│   ├── .gitkeep
 │   ├── train.parquet
 │   ├── benchmark_items.parquet
 │   └── benchmark_queries.parquet
 └── notebooks/
     └── pipeline.ipynb          # полный пайплайн: данные → BM25 → Bi-Encoder → RRF → анализ ошибок → инференс
 ```
+
+## Данные
+
+Датасет со всеми необходимыми файлами (`train.parquet`, `benchmark_items.parquet`, `benchmark_queries.parquet`) опубликован на Kaggle:  
+👉 **[Kaggle: bogdanborovoy/avito-ds](https://www.kaggle.com/datasets/bogdanborovoy/avito-ds)**
 
 ## Описание решения
 
@@ -59,6 +65,12 @@ avito-search-relevance/
 
 ## Как запустить
 
+### Вариант 1. Запуск в Kaggle Notebooks (рекомендуется)
+1. Создать новый ноутбук в Kaggle с GPU (T4 / P100).
+2. Подключить датасет **[bogdanborovoy/avito-ds](https://www.kaggle.com/datasets/bogdanborovoy/avito-ds)** через меню `Data` → `Add Input`.
+3. Импортировать и запустить `notebooks/pipeline.ipynb` (путь к данным подхватится автоматически).
+
+### Вариант 2. Запуск локально
 1. Клонировать репозиторий и установить зависимости:
 
    ```bash
@@ -67,10 +79,12 @@ avito-search-relevance/
    pip install -r requirements.txt
    ```
 
-2. Положить файлы данных в папку `data/` (относительный путь `data/` из корня проекта или `../data/` из папки `notebooks/`):
-   - `data/train.parquet`
-   - `data/benchmark_items.parquet`
-   - `data/benchmark_queries.parquet`
+2. Скачать данные из Kaggle в папку `data/`:
+
+   ```bash
+   kaggle datasets download -d bogdanborovoy/avito-ds -p data/ --unzip
+   ```
+   *(либо скачать вручную со страницы [Kaggle Dataset](https://www.kaggle.com/datasets/bogdanborovoy/avito-ds) и распаковать в `data/`)*.
 
 3. Открыть `notebooks/pipeline.ipynb` и выполнить ячейки по порядку — ноутбук автоматически находит данные в `data/` (или `../data/`), строит BM25-индекс, дообучает Bi-Encoder, объединяет потоки через RRF, проводит анализ ошибок и формирует `answer.csv` для сабмита.
 

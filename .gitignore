@@ -1,5 +1,6 @@
 # Данные (слишком большие / не подлежат публикации)
-data/
+data/*
+!data/.gitkeep
 *.parquet
 answer.csv
 
