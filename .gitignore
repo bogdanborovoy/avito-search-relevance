@@ -1,0 +1,20 @@
+# Данные (слишком большие / не подлежат публикации)
+data/
+*.parquet
+answer.csv
+
+# Веса дообученной модели
+best_rubert_model/
+*.pt
+*.bin
+*.safetensors
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

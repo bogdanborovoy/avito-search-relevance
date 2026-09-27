@@ -1,0 +1,7 @@
+bm25s
+PyStemmer
+sentence-transformers
+torch
+pandas
+numpy
+tqdm
