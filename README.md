@@ -48,8 +48,7 @@ avito-search-relevance/
 
 ## Данные
 
-Датасет со всеми необходимыми файлами (`train.parquet`, `benchmark_items.parquet`, `benchmark_queries.parquet`) опубликован на Kaggle:  
-👉 **[Kaggle: bogdanborovoy/avito-ds](https://www.kaggle.com/datasets/bogdanborovoy/avito-ds)**
+Файлы датасета (`train.parquet`, `benchmark_items.parquet`, `benchmark_queries.parquet`) размещены на платформе Kaggle: [bogdanborovoy/avito-ds](https://www.kaggle.com/datasets/bogdanborovoy/avito-ds).
 
 ## Описание решения
 
