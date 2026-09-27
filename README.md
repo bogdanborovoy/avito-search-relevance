@@ -37,8 +37,12 @@ avito-search-relevance/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
+├── data/                       # датасет и тестовые данные (не включены в git, см. .gitignore)
+│   ├── train.parquet
+│   ├── benchmark_items.parquet
+│   └── benchmark_queries.parquet
 └── notebooks/
-    └── pipeline.ipynb      # полный пайплайн: данные → BM25 → Bi-Encoder → RRF → анализ ошибок → инференс
+    └── pipeline.ipynb          # полный пайплайн: данные → BM25 → Bi-Encoder → RRF → анализ ошибок → инференс
 ```
 
 ## Описание решения
@@ -58,14 +62,17 @@ avito-search-relevance/
 1. Клонировать репозиторий и установить зависимости:
 
    ```bash
-   git clone https://github.com/<ваш-юзернейм>/avito-search-relevance.git
+   git clone https://github.com/bogdanborovoy/avito-search-relevance.git
    cd avito-search-relevance
    pip install -r requirements.txt
    ```
 
-2. Положить `train.parquet`, `benchmark_items.parquet`, `benchmark_queries.parquet` в папку `data/` (не включена в репозиторий, см. `.gitignore`).
+2. Положить файлы данных в папку `data/` (относительный путь `data/` из корня проекта или `../data/` из папки `notebooks/`):
+   - `data/train.parquet`
+   - `data/benchmark_items.parquet`
+   - `data/benchmark_queries.parquet`
 
-3. Открыть `notebooks/pipeline.ipynb` и выполнить ячейки по порядку — ноутбук строит BM25-индекс, дообучает Bi-Encoder, объединяет потоки через RRF, проводит анализ ошибок и формирует `answer.csv` для сабмита.
+3. Открыть `notebooks/pipeline.ipynb` и выполнить ячейки по порядку — ноутбук автоматически находит данные в `data/` (или `../data/`), строит BM25-индекс, дообучает Bi-Encoder, объединяет потоки через RRF, проводит анализ ошибок и формирует `answer.csv` для сабмита.
 
 ## Ключевые технические решения
 
